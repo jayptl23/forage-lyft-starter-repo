@@ -1,5 +1,6 @@
 from battery import Battery
 from datetime import date
+from utils import get_service_threshold_date
 
 
 class SpindlerBattery(Battery):
@@ -8,6 +9,6 @@ class SpindlerBattery(Battery):
         self.current_date = current_date
 
     def needs_service(self) -> bool:
-        service_threshold_date = self.last_service_date.replace(
-            year=self.last_service_date.year + 2)
+        service_threshold_date = get_service_threshold_date(
+            self.last_service_date, 3)
         return service_threshold_date < self.current_date
